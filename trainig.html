@@ -266,6 +266,123 @@
         </div>
     </div>
 
+
+<!-- Event Dropdown Section -->
+<div class="event-dropdown">
+    <button class="dropdown-btn">Events</button>
+    <div class="dropdown-content" id="yearDropdown">
+        <button class="dropdown-item" onclick="showMonths(2023)">2023</button>
+        <button class="dropdown-item" onclick="showMonths(2024)">2024</button>
+        <button class="dropdown-item" onclick="showMonths(2025)">2025</button>
+    </div>
+    <div class="dropdown-content" id="monthDropdown" style="display: none;"></div>
+    <div class="event-details" id="eventDetails" style="display: none;"></div>
+</div>
+
+<style>
+    .event-dropdown {
+        position: relative;
+        margin: 1rem;
+    }
+
+    .dropdown-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        border-radius: 5px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 150px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .dropdown-content button {
+        background: none;
+        border: none;
+        color: #333;
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .dropdown-content button:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .event-details {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownBtn = document.querySelector(".dropdown-btn");
+        const yearDropdown = document.getElementById("yearDropdown");
+        const monthDropdown = document.getElementById("monthDropdown");
+        const eventDetails = document.getElementById("eventDetails");
+
+        dropdownBtn.addEventListener("click", () => {
+            yearDropdown.style.display = yearDropdown.style.display === "block" ? "none" : "block";
+            monthDropdown.style.display = "none";
+            eventDetails.style.display = "none";
+        });
+    });
+
+    function showMonths(year) {
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let monthDropdown = document.getElementById("monthDropdown");
+
+        monthDropdown.innerHTML = ""; 
+        months.forEach(month => {
+            let btn = document.createElement("button");
+            btn.className = "dropdown-item";
+            btn.textContent = month;
+            btn.onclick = () => showEvents(year, month);
+            monthDropdown.appendChild(btn);
+        });
+
+        monthDropdown.style.display = "block";
+        document.getElementById("eventDetails").style.display = "none";
+    }
+
+    function showEvents(year, month) {
+        let eventDetails = document.getElementById("eventDetails");
+
+    
+        const events = {
+            "January": "AI Workshop on Jan 15",
+            "February": "Cybersecurity Meetup on Feb 20",
+            "March": "IoT Hackathon on Mar 10",
+            "April": "Web Dev Bootcamp on Apr 5",
+        };
+
+        eventDetails.innerHTML = `<h4>Events in ${month} ${year}</h4><p>${events[month] || "No events available"}</p>`;
+        eventDetails.style.display = "block";
+    }
+</script>
+
+
+
+
+
+
+
+    
+
     <!-- New Content Sections -->
     <div class="content-section">
         <div class="section">
